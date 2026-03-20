@@ -2,7 +2,7 @@
 import { serve } from "bun";
 
 serve({
-    port: 3001,
+    port: process.env.PORT || 3001,
     fetch(req) {
         const url = new URL(req.url);
         if (req.method === "GET" && url.pathname === "/health") {
