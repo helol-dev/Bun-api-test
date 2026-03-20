@@ -64,7 +64,7 @@ async function sendMessage() {
             let errorData = { error: "Unknown error" };
             try {
                 errorData = await response.json();
-            } catch (_) {}
+            } catch (_) { }
             const errorMsg = `Error ${response.status}: ${errorData.error || "Unknown error"}`;
             botBubble.textContent = errorMsg;
             botBubble.classList.add("error");
