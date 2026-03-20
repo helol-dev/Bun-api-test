@@ -1,7 +1,7 @@
 import { openRouter } from "./openRouterClient";
 
-export async function sendChatMessage(userMessage: string) {
-    const stream = await openRouter.chat.send({
+export async function streamChatMessage(userMessage: string) {
+    return openRouter.chat.send({
         chatGenerationParams: {
             model: "openrouter/free",
             messages: [
@@ -10,6 +10,10 @@ export async function sendChatMessage(userMessage: string) {
             stream: true,
         },
     });
+}
+
+export async function sendChatMessage(userMessage: string) {
+    const stream = await streamChatMessage(userMessage);
 
     let responseText = "";
     let usage = null;

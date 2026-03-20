@@ -1,4 +1,4 @@
-import { sendChatMessage } from "./chatService";
+import { streamChatMessage } from "./chatService";
 
 export async function chatHandler(req: Request): Promise<Response> {
     const url = new URL(req.url);
@@ -37,11 +37,33 @@ export async function chatHandler(req: Request): Promise<Response> {
     }
 
     try {
-        const result = await sendChatMessage(message);
+        const stream = await streamChatMessage(message);
 
-        return new Response(JSON.stringify({ result }), {
+        const readable = new ReadableStream({
+            async start(controller) {
+                try {
+                    for await (const chunk of stream) {
+                        const content = chunk.choices?.[0]?.delta?.content;
+                        if (content) {
+                            controller.enqueue(new TextEncoder().encode(content));
+                        }
+                    }
+                    controller.close();
+                } catch (err) {
+                    controller.error(err);
+                }
+            },
+            cancel() {
+                // Si se quiere, se puede cerrar conexión de OpenRouter si se expone.
+            },
+        });
+
+        return new Response(readable, {
             status: 200,
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "text/plain; charset=utf-8",
+                "Cache-Control": "no-cache",
+            },
         });
     } catch (error) {
         return new Response(
