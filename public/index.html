@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat API Tester</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chat API</h1>
+            <p>Prueba la API de streaming en tiempo real</p>
+        </header>
+
+        <main>
+            <div class="form-container">
+                <input
+                    type="text"
+                    id="messageInput"
+                    placeholder="Escribe tu pregunta..."
+                    class="input-field"
+                    autocomplete="off"
+                />
+                <button id="sendBtn" class="send-button">Enviar</button>
+            </div>
+
+            <div class="response-container">
+                <div id="responseOutput" class="response-output"></div>
+                <div id="loadingSpinner" class="loading-spinner hidden">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+            <div class="info">
+                <p><strong>Endpoint:</strong> POST /chat</p>
+                <p><strong>Body:</strong> <code>{"message": "tu pregunta"}</code></p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by OpenRouter + Bun</p>
+        </footer>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
