@@ -6,6 +6,7 @@ serve({
     port: Number(process.env.PORT || 3000),
     async fetch(req) {
         const url = new URL(req.url);
+        console.log(`[fetch] ${req.method} ${url.pathname}`);
 
         if (req.method === "GET" && url.pathname === "/health") {
             return new Response(JSON.stringify({ status: "ok" }), {

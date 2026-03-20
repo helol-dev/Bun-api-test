@@ -1,15 +1,23 @@
 import { openRouter } from "./openRouterClient";
 
 export async function streamChatMessage(userMessage: string) {
-    return openRouter.chat.send({
-        chatGenerationParams: {
-            model: "openrouter/free",
-            messages: [
-                { role: "user", content: userMessage },
-            ],
-            stream: true,
-        },
-    });
+    console.log("[streamChatMessage] Calling OpenRouter API with message:", userMessage.substring(0, 50));
+    try {
+        const result = await openRouter.chat.send({
+            chatGenerationParams: {
+                model: "openai/gpt-4o",
+                messages: [
+                    { role: "user", content: userMessage },
+                ],
+                stream: true,
+            },
+        });
+        console.log("[streamChatMessage] Got response from OpenRouter");
+        return result;
+    } catch (error) {
+        console.error("[streamChatMessage] OpenRouter error:", error);
+        throw error;
+    }
 }
 
 export async function sendChatMessage(userMessage: string) {

@@ -1,48 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat API Tester</title>
-    <link rel="stylesheet" href="/styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatGPT UI - Chat API</title>
+    <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Chat API</h1>
-            <p>Prueba la API de streaming en tiempo real</p>
-        </header>
+    <div class="chat-app">
+        <aside class="sidebar">
+            <div class="logo">ChatGPT</div>
+            <button class="new-chat">+ New chat</button>
+            <div class="side-label">Conversaciones</div>
+        </aside>
 
-        <main>
-            <div class="form-container">
-                <input
-                    type="text"
-                    id="messageInput"
-                    placeholder="Escribe tu pregunta..."
-                    class="input-field"
-                    autocomplete="off"
-                />
+        <section class="main-section">
+            <header class="chat-header">
+                <div class="chat-title">OpenRouter Chat</div>
+                <div class="chat-status">En línea</div>
+            </header>
+
+            <div class="chat-area" id="chatArea">
+                <div id="responseOutput" class="chat-messages empty">Escribe un mensaje y presiona Enviar...</div>
+            </div>
+
+            <div class="input-panel">
+                <textarea id="messageInput" class="chat-input" placeholder="Escribe tu mensaje..." rows="1"></textarea>
                 <button id="sendBtn" class="send-button">Enviar</button>
             </div>
 
-            <div class="response-container">
-                <div id="responseOutput" class="response-output"></div>
-                <div id="loadingSpinner" class="loading-spinner hidden">
-                    <div class="spinner"></div>
-                </div>
-            </div>
-
-            <div class="info">
-                <p><strong>Endpoint:</strong> POST /chat</p>
-                <p><strong>Body:</strong> <code>{"message": "tu pregunta"}</code></p>
-            </div>
-        </main>
-
-        <footer>
-            <p>Powered by OpenRouter + Bun</p>
-        </footer>
+            <div class="info-line">POST /chat • Body: {"message": "..."}</div>
+        </section>
     </div>
 
+    <div id="toast" class="toast" aria-live="polite"></div>
     <script src="/script.js"></script>
 </body>
 </html>
