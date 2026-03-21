@@ -31,6 +31,7 @@ async function sendMessage() {
 
     console.log("Sending message:", message);
     sendBtn.disabled = true;
+    sendBtn.textContent = "Enviando";
     messageInput.disabled = true;
     responseOutput.classList.remove("empty");
 
@@ -88,6 +89,8 @@ async function sendMessage() {
         let buffer = [];
         let isStreaming = true;
 
+        sendBtn.textContent = "Recibiendo";
+
         botBubble.textContent = "";
 
         // Mostrar caracteres conforme llegan
@@ -135,6 +138,7 @@ async function sendMessage() {
         console.error("sendMessage error:", error);
     } finally {
         sendBtn.disabled = false;
+        sendBtn.textContent = "Enviar";
         messageInput.disabled = false;
         messageInput.focus();
     }
