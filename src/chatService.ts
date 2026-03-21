@@ -5,7 +5,7 @@ export async function streamChatMessage(userMessage: string) {
     try {
         const result = await openRouter.chat.send({
             chatGenerationParams: {
-                model: "openai/gpt-4o",
+                model: "openrouter/free",
                 messages: [
                     { role: "user", content: userMessage },
                 ],
